@@ -8,7 +8,7 @@ if [ "$1" != "-f" ]; then
 	#检查更新
 	rm -rf /tmp/tools_version.txt
 	result=$(curl -skL -w %{http_code} -o /tmp/tools_version.txt $monlorurl/config/version.txt)
-	[ "$result" == "200" ] && logsh "【Tools】" "检查更新失败！" && exit
+	[ "$result" != "200" ] && logsh "【Tools】" "检查更新失败！" && exit
 	newver=$(cat /tmp/tools_version.txt)
 	oldver=$(cat $monlorpath/config/version.txt)
 	logsh "【Tools】" "当前版本$oldver，最新版本$newver"

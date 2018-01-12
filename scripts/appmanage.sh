@@ -81,7 +81,7 @@ upgrade() {
 		#检查更新
 		rm -rf /tmp/version.txt
 		result=$(curl -skL -w %{http_code} -o /tmp/version.txt $monlorurl/apps/$appname/config/version.txt)
-		[ "$result" == "200" ] && logsh "【Tools】" "检查更新失败！" && exit
+		[ "$result" != "200" ] && logsh "【Tools】" "检查更新失败！" && exit
 		newver=$(cat /tmp/version.txt)
 		oldver=$(cat $monlorpath/apps/$appname/config/version.txt) > /dev/null 2>&1
 		[ $? -ne 0 ] && logsh "【Tools】" "$appname文件出现问题，请卸载后重新安装" && exit

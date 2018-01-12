@@ -73,7 +73,6 @@ reset() {
    #	git push -f origin master
 	github
 	coding
-	test
 
 }
 
