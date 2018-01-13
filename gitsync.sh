@@ -23,7 +23,6 @@ pack() {
 		# sed -i $flag '5s/#//' monlor/scripts/base.sh
 		cp install.sh install_test.sh
 		sed -i $flag 's/Monlor-Tools/Monlor-Test/' install_test.sh
-		rm -rf install_test.sh""
 	fi
 	tar -zcvf monlor.tar.gz monlor/
 	#zip -r monlor.zip monlor/
