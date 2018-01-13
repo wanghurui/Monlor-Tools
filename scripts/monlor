@@ -179,6 +179,7 @@ menu() {
 	read -p "请输入你的选择(exit退出)：" select
 	echo
 	[ "$select" == "exit" ] && exit
+	[ -z "$select" ] && exit
 	if [ `echo $select | grep -c '^[0-9][0-9]*$'` -eq 1 ]; then
 		if [ "$select" == '0' ]; then
 			manage
@@ -196,8 +197,6 @@ menu() {
 				read -p "确定要安装$appname插件？[1/0] " install
 				[ "$install" = '1' ] && appmanage.sh add $appname 
 			fi
-		elif [ -z "$select" ]; then
-			exit
 		else
 			echo "输入有误！"
 			exit
