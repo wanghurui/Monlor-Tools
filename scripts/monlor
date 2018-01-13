@@ -196,7 +196,9 @@ menu() {
 				read -p "确定要安装$appname插件？[1/0] " install
 				[ "$install" = '1' ] && appmanage.sh add $appname 
 			fi
-		else 
+		elif [ -z "$select" ]; then
+			exit
+		else
 			echo "输入有误！"
 			exit
 		fi
