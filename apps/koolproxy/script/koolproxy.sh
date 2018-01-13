@@ -185,6 +185,14 @@ detect_cert () {
     fi
 }
 
+update_userrule () {
+    result=$(ps | grep "{init.sh}" | grep -v grep | wc -l)
+    if [ "$result" != '0' ]; then
+        result=$(curl -skL -w %{http_code} -o /tmp/user.txt https://raw.githubusercontent.com/kysdm/ad-rules/master/user-rules-koolproxy.txt)
+        [ "$result" == "200" ] && cp -rf /tmp/user.txt $monlorpath/apps/$appname/bin/data/rules/user.txt
+    fi
+}
+
 start () {
 
     result=$(ps | grep $BIN | grep -v grep | wc -l)
@@ -194,6 +202,7 @@ start () {
     fi
     [ -z $koolproxy_policy ] && logsh "【$service】" "$appname未配置" && exit
     detect_cert
+    update_userrule
     start_koolproxy
     add_ipset_conf && restart_dnsmasq
     create_ipset
