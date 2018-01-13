@@ -188,6 +188,7 @@ detect_cert () {
 update_userrule () {
     result=$(ps | grep "{init.sh}" | grep -v grep | wc -l)
     if [ "$result" != '0' ]; then
+        logsh "【$service】" "更新用户自定义规则"
         result=$(curl -skL -w %{http_code} -o /tmp/user.txt https://raw.githubusercontent.com/kysdm/ad-rules/master/user-rules-koolproxy.txt)
         [ "$result" == "200" ] && cp -rf /tmp/user.txt $monlorpath/apps/$appname/bin/data/rules/user.txt
     fi
